@@ -40,4 +40,8 @@ public class ControladoraLogica {//es mi main
         return ciudadanosCoincidentes;
     }
 
+    public void eliminarCiudadano(Long id) {
+        controlPersi.eliminarCiudadano(id);
+    }
+
 }

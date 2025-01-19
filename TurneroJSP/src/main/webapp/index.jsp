@@ -77,6 +77,16 @@
              </table> 
          </div>
              
+          <!--Eliminación de ciudadano-->  
+            <h2 class="mt-4">Eliminación</h2>
+        <form action="EliminarCiudadanoSv" method="POST">
+             <div class="form-group">
+                 <label for="id_ciudadano">Ingrese id para eliminar ciudadano</label>
+                <input type="text" class="form-control" id="id_ciudadano" name="id_ciudadano">
+            </div> 
+            
+          <button type="submit" class="btn btn-primary">Eliminar</button>  
+        </form>   
              
         </div>
         <!-- Scripts de Bootstrap -->

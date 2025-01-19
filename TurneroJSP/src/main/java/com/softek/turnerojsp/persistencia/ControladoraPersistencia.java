@@ -2,8 +2,11 @@
 package com.softek.turnerojsp.persistencia;
 
 import com.softek.turnerojsp.logica.Ciudadano;
-import java.util.ArrayList;
+import com.softek.turnerojsp.persistencia.exceptions.NonexistentEntityException;
+
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ControladoraPersistencia {
@@ -24,5 +27,13 @@ public class ControladoraPersistencia {
         return ciudadJpa.findPersonaByApellido(busquedaApellido);
 
          }
+//borrado fisico, debo hacer borrado logico
+    public void eliminarCiudadano(Long id) {
+        try {
+            ciudadJpa.destroy(id);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

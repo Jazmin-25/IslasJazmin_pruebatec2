@@ -15,7 +15,7 @@
         <div class="container mt-4">
             <!--<!-- Formulario alta -->
             <h2>Formulario de registro</h2>
-            <form action="PersonaSv" method="POST">
+            <form action="CiudadanoSv" method="POST">
                 
                  <div class="form-group">
                      <label for="nombre">Nombre:</label>
@@ -38,7 +38,7 @@
 
             <!--<!--Busqueda de ciudadanos -->
             <h2 class="mt-4">Busqueda de ciudadano</h2>
-            <form action="PersonaSv" method="GET">
+            <form action="CiudadanoSv" method="GET">
                 <div class=form-gropu">
                     <label for="busquedaApellido">Buscar por Apellido:</label>
                     <input type="text" class="form-control" id="busquedaApellido" name="busquedaApellido">
@@ -60,7 +60,7 @@
                     <tbody>
                         <%
                             //traer la lista de personas
-                            List<Ciudadano> listaCiudadanos = (ArrayList<Ciudadano>) request.getAttribute("listaCiudadanos");
+                            List<Ciudadano> listaCiudadanos = (List) request.getSession().getAttribute("listaCiudadanos");
                             if (listaCiudadanos != null) {
                                 for (Ciudadano ciudad : listaCiudadanos) {//agregar programacion funcional al for%>
                         <tr>

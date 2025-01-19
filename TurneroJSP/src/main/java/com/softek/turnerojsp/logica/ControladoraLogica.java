@@ -15,8 +15,8 @@ public class ControladoraLogica {//es mi main
         controlPersi.crearCiudadano(ciudad);
     }
 
-    //filtrado en la logica
-    public ArrayList<Ciudadano> buscarPorApellido(String busquedaApellido) {
+    //filtrado en la logica opcion 1 la menos eficiente
+    /*public ArrayList<Ciudadano> buscarPorApellido(String busquedaApellido) {
        ArrayList<Ciudadano> ciudadanosCoincidentes = new ArrayList<>(); //se puede hacer con programacion funcional
         List<Ciudadano> listaCiudadanos = controlPersi.traerCiudadanos();
         
@@ -27,4 +27,17 @@ public class ControladoraLogica {//es mi main
        }
        return ciudadanosCoincidentes;
     }
+*/
+    /*opción 2
+        Paso este dato a la lógica, la lógica le pide a la persistencia que traiga SOLO LOS DATOS QUE COINCIDAN,
+        y la lógica solo responde los datos ya filtrados desde la BD 
+        */
+      //la base de datos se encarga de traer todo filtrado
+    public List<Ciudadano> buscarPorApellido(String busquedaApellido) {
+    List<Ciudadano> ciudadanosCoincidentes = new ArrayList<>(); //se puede hacer con programacion funcional
+      ciudadanosCoincidentes = controlPersi.buscarPorApellido(busquedaApellido);
+        
+        return ciudadanosCoincidentes;
+    }
+
 }

@@ -133,4 +133,21 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
     
+     //método para filtrar personas por apellido en la BD
+    public List<Ciudadano> findPersonaByApellido (String busquedaApellido) {
+        EntityManager em =getEntityManager();
+        
+        try {
+            //consulta JPQL para buscar por apellido
+            String consulta = "SELECT per FROM Ciudadano per WHERE per.apellido = :busquedaApellido";
+            Query query = em.createQuery(consulta);
+            query.setParameter("busquedaApellido",busquedaApellido);
+            
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+
+    
+}
 }

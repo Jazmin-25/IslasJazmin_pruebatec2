@@ -3,7 +3,6 @@ package com.softek.turnerojsp.servlets;
 import com.softek.turnerojsp.logica.Ciudadano;
 import com.softek.turnerojsp.logica.ControladoraLogica;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +28,7 @@ public class CiudadanoSv extends HttpServlet {
             throws ServletException, IOException {
         String busquedaApellido = request.getParameter("busquedaApellido");
         //opcion 1 paso el dato a la logica y filtra
-        ArrayList<Ciudadano> listaCiudadanos = control.buscarPorApellido(busquedaApellido);
+        List<Ciudadano> listaCiudadanos = control.buscarPorApellido(busquedaApellido);
         
         HttpSession miSession = request.getSession();
         miSession.setAttribute("listaCiudadanos", listaCiudadanos);

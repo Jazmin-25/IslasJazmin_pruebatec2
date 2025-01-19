@@ -14,10 +14,15 @@ public class ControladoraPersistencia {
        //llamo jpaController y le paso a la persona para crearlo
        ciudadJpa.create(ciudad);
     }
-
+//con el metodo 1 logico menos recomendable
     public List<Ciudadano> traerCiudadanos() {
        return ciudadJpa.findCiudadanoEntities();
                 
     }
+
+    public List<Ciudadano> buscarPorApellido(String busquedaApellido) {
+        return ciudadJpa.findPersonaByApellido(busquedaApellido);
+
+         }
     
 }

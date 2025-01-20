@@ -44,4 +44,8 @@ public class ControladoraLogica {//es mi main
         controlPersi.eliminarCiudadano(id);
     }
 
+    public Ciudadano buscarCiudadano(Long id) {
+        return controlPersi.traerCiudadano(id);
+    }
+
 }

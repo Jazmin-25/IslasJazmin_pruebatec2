@@ -35,5 +35,17 @@ public class ControladoraPersistencia {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Ciudadano traerCiudadano(Long id) {
+       return ciudadJpa.findCiudadano(id);
+    }
     
+    public void editarPersona(Ciudadano ciudad) {
+        try {
+            ciudadJpa.edit(ciudad);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

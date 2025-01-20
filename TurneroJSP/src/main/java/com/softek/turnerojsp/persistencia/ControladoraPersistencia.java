@@ -24,7 +24,7 @@ public class ControladoraPersistencia {
     }
 
     public List<Ciudadano> buscarPorApellido(String busquedaApellido) {
-        return ciudadJpa.findPersonaByApellido(busquedaApellido);
+        return ciudadJpa.findCiudadanoByApellido(busquedaApellido);
 
          }
 //borrado fisico, debo hacer borrado logico
@@ -40,7 +40,8 @@ public class ControladoraPersistencia {
        return ciudadJpa.findCiudadano(id);
     }
     
-    public void editarPersona(Ciudadano ciudad) {
+    //editarciudadano
+    public void editarCiudadano(Ciudadano ciudad) {
         try {
             ciudadJpa.edit(ciudad);
         } catch (Exception ex) {

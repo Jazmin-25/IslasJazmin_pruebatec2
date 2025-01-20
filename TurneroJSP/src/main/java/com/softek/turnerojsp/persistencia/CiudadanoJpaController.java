@@ -133,8 +133,8 @@ public class CiudadanoJpaController implements Serializable {
         }
     }
     
-     //método para filtrar personas por apellido en la BD
-    public List<Ciudadano> findPersonaByApellido (String busquedaApellido) {
+     //método para filtrar ciudadanos por apellido en la BD
+    public List<Ciudadano> findCiudadanoByApellido (String busquedaApellido) {
         EntityManager em =getEntityManager();
         
         try {

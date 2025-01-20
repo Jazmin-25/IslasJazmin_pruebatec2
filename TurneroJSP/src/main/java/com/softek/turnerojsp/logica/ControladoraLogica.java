@@ -48,4 +48,8 @@ public class ControladoraLogica {//es mi main
         return controlPersi.traerCiudadano(id);
     }
 
+    public void editarCiudadano(Ciudadano ciudad) {
+    controlPersi.editarCiudadano(ciudad);
+    }
+
 }

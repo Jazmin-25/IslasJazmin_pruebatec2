@@ -59,7 +59,7 @@
                     </thead>        
                     <tbody>
                         <%
-                            //traer la lista de personas
+                            //traer la lista de ciudadanos
                             List<Ciudadano> listaCiudadanos = (List) request.getSession().getAttribute("listaCiudadanos");
                             if (listaCiudadanos != null) {
                                 for (Ciudadano ciudad : listaCiudadanos) {//agregar programacion funcional al for%>

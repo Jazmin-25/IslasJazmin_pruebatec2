@@ -1,6 +1,7 @@
 # IslasJazmin_pruebatec2
 # Sistema de Gestión de Turnos 📋
 **Automatización de la administración de turnos en entidades gubernamentales**
+
 ---
 ## 🌟 **Introducción**
 El Sistema de Gestión de Turnos es una solución diseñada para automatizar la administración de turnos en una entidad gubernamental. Este sistema, desarrollado para la Secretaría de Movilidad, busca optimizar el proceso de asignación y atención a los ciudadanos, ofreciendo un servicio más eficiente y ordenado.
@@ -12,21 +13,26 @@ La Secretaría de Movilidad requiere un sistema para gestionar turnos de manera 
 -Renovación de licencia de conducir.
 -Corrección de datos.
 -Reemplazo por vigencia
+
 ---
-# Problemas Resueltos por el Sistema
-•	Elimina la gestión manual de turnos, reduciendo errores.
-•	Mejora la eficiencia en la atención ciudadana.
-•	Centraliza la información para facilitar la supervisión y generación de reportes.
-# Alcance del Proyecto
-•	Automatizar la gestión de turnos.
-•	Registrar y mantener información de ciudadanos, trámites y turnos.
-# Supuestos del Sistema
+## ✅ **Problemas Resueltos**
+- 📉 **Reducción de errores** al eliminar la gestión manual.
+- 🚀 **Mejor eficiencia** en la atención ciudadana.
+- 📊 **Centralización de información** para supervisión y reportes.
+
+---
+## 🎯 **Alcance del Proyecto**
+1. Automatizar la gestión de turnos.
+2. Registrar y mantener información de ciudadanos, trámites y turnos.
+
+---
+## 📝 **Supuestos del Sistema**
 - Se asume la palabra turno y no cita porque se establece un orden que permite organizar la gestión de los ciudadanos al ingresar a la entidad gubernamental para realizar un trámite especifico
-- Cada turno tiene un trámite específico asociado.
-- Los roles de usuario están predefinidos.
+- Los roles de usuario están predefinidos por la entidad gubernamental, el unico que asigna los roles es el supervisor (no se realizan permisos por simplicidad). 
 - Se asume que el sistema opera de 9:00 a.m. a 5:00 p.m. Horario dentro del cual se atiende a todos los ciudadanos que lleguen dentro del horario, por lo que no se crean citas para los días siguientes. Siendo la Secretaria de Movidad una ventana de servicio exclusiva por día.
+- Cada turno tiene un trámite específico asociado.
 - La fecha y hora de los turnos se almacenan como texto por simplicidad.
-- Se asume la fecha y hora del turno dentro del horario laboral de 9:00 a.m. a 5:00 p.m. Por lo cual se establece el valor de fecha hora del turno como string y no como LocalDateTime
+- Se asume la fecha y hora del turno dentro del horario laboral de 9:00 a.m. a 5:00 p.m. Por lo cual se establece el valor de fecha hora del turno como string y no como LocalDateTime por simplicidad.
 - Se asume string fecha hora del turno por términos de practicidad del ejercicio, en caso de tener que modificarlo se levantara el ticket
 - Los turnos, ciudadanos y tramites no se eliminan, solo usuarios; el supervisor o administrador pueden hacerlo (sin embargo dentro del código se agregan la eliminación para fines prácticos de la demostración del CRUD). 
 - Se asume que los empleados recepcionista y gestor tramite contaran con sus permisos y roles ya establecidos, por lo que no se genera el código.
@@ -35,17 +41,81 @@ La Secretaría de Movilidad requiere un sistema para gestionar turnos de manera 
 - Se asume que los turnos tendrán dos estados: "En espera" o "Ya atendido" por lo que no se borraran los turnos, solo el administrador podrá realizarlo.
 - Se asume que un ciudadano puede tener múltiples turnos, por lo que se realiza una relación uno a muchos entre ciudadano y turno.
 - Se asume que un usuario puede asignar muchos turnos, por lo que se realiza una relación de uno a muchos entre usuario y turno.
-# Diseño del Sistema
-El sistema de turnos estará diseñado para administrar las colas de atención por día, dentro del horario de 9:00 a.m. a 5:00 p.m. El sistema está orientado a una entidad gubernamental que contará con:
-1.	Un empleado recepcionista (asignador), encargado de asignar los turnos a los ciudadanos.
-2.	Un empleado administrativo (gestor de trámites), quien atenderá a los ciudadanos según el orden de los turnos asignados.
-3.	Un empleado supervisor (admin) que gestiona los roles de los empleados y supervisa el sistema de atención ciudadana.
-# Entidades del Sistema
-•	Ciudadano: Representa a la persona que solicita el turno.
-•	Trámite: Representa el tipo de trámite a realizar mencionado en la descripción del caso.
-•	Turno: Representa la asignación de un trámite a un ciudadano dentro del horario de atención, con un estado asociado (en espera o atendido).
-•	Usuario: Representa a los usuarios del sistema. Al recepcionista que asigna los turnos (asignador), el administrativo (gestor tramite)
-# Relaciones entre Entidades
+
+---
+## 🛠️ **Diseño del Sistema**
+El sistema está orientado a gestionar turnos diarios (9:00 a.m. a 5:00 p.m.), con los siguientes roles:
+
+1. **Recepcionista (asignador)**: Asigna turnos a los ciudadanos.
+2. **Gestor de trámites (administrativo)**: Atiende a los ciudadanos en el orden asignado.
+3. **Supervisor (admin)**: Gestiona roles y supervisa el sistema.
+
+---
+## 📋 **Entidades del Sistema**
+- **Ciudadano**: Persona que solicita un turno.
+- **Trámite**: Tipo de trámite solicitado.
+- **Turno**: Registro asignado al ciudadano y al trámite, con estado ("En espera", "Ya atendido").
+- **Usuario**: Empleado con roles predefinidos (recepcionista, administrativo, supervisor).
+
+---
+## 🛠️ **Relaciones entre Entidades**
 -	Un ciudadano puede tener múltiples turnos: Relación uno a muchos entre ciudadano y turno.
 -	Usuario - Turno: Un usuario puede asignar muchos turnos. Relación de uno a muchos entre usuario y turno.
 -	Turno - Trámite: Un turno está asociado a un trámite específico. Esta es una relación de uno a uno.
+
+---
+## 🔄 **Flujo del Sistema**
+1. **Inicio de Sesión**:
+- Cada usuario ingresa con correo y contraseña.
+- Los usuarios son:
+- Recepcionista (asignador): Encargado de registrar turnos.
+- Administrativo (gestor de trámites): Responsable de atender a los ciudadanos.
+- Supervisor (admin): Encargado de la gestión y supervisión general del sistema.
+
+---
+2. **Registro de Turnos**:
+Cuando un ciudadano llega a la Secretaria de Movilidad para realizar un trámite, el recepcionista lo registra:
+- Datos requeridos: Nombre, apellido y teléfono del ciudadano.
+   - Generación automática de un número de turno.
+4. **Gestión de Turnos**:
+En la pantalla del sistema, el gestor de trámites podrá visualizar la fila de turnos asignados por el recepcionista.
+- Estados: "En espera" y "Ya atendido".
+- Gestión en tiempo real por el administrativo.
+5. **Gestión de Usuarios**:
+- Creación de nuevos usuarios con roles específicos por el supervisor.
+
+---
+## 💻 **Tecnologías Utilizadas**
+- **Backend**: Java 17 + Servlets.
+- **Frontend**: JSP, Bootstrap, JavaScript.
+- **Persistencia**: JPA (Java Persistence API).
+- **Base de Datos**: MySQL.
+
+---
+## ⚙️ **Requisitos Técnicos**
+1. Java 17 y OpenJDK.
+2. Apache Tomcat como servidor de aplicaciones.
+3. MySQL para la base de datos.
+4. JPA y JSP para la lógica y presentación.
+
+---
+## 🚀 **Cómo Ejecutar el Sistema**
+1. Instalar Apache Tomcat y configurar el proyecto.
+2. Importar el esquema SQL en MySQL.
+3. Iniciar sesión en Apache Tomca con las siguientes credenciales:
+   - Usuario: `admin`
+   - Contraseña: `123`
+4. En phpMyAdmin iniciar sesión con las siguientes credenciales:
+   - Usuario: `root`
+   - Contraseña: `  ` (vacio, no lleva ninguna contraseña)
+6.  Probar funcionalidades principales como el registro y gestión de turnos.
+---
+## 📦 **Material Entregado**
+1. **Documentación**: Guía completa del sistema.
+2. **Código Fuente**: Estructurado y organizado.
+3. **Base de Datos**: 
+   - Esquema SQL.
+   - Datos de prueba.
+4. **Diagrama UML**: Representación de entidades y relaciones.
+
+---

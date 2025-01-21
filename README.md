@@ -125,5 +125,5 @@ En la pantalla del sistema, el gestor de trámites podrá visualizar la fila de 
    - Esquema SQL.
    - Datos de prueba.
 4. **Diagrama UML**: Representación de entidades y relaciones.
-
+![Diagrama UML](https://github.com/Jazmin-25/IslasJazmin_pruebatec2/blob/main/DiagramaClasesTurnero.drawio.png?raw=true)
 ---

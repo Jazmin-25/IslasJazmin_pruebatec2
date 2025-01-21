@@ -27,20 +27,20 @@ La Secretaría de Movilidad requiere un sistema para gestionar turnos de manera 
 
 ---
 ## 📝 **Supuestos del Sistema**
-- Se asume la palabra turno y no cita porque se establece un orden que permite organizar la gestión de los ciudadanos al ingresar a la entidad gubernamental para realizar un trámite especifico
-- Los roles de usuario están predefinidos por la entidad gubernamental, el unico que asigna los roles es el supervisor (no se realizan permisos por simplicidad). 
-- Se asume que el sistema opera de 9:00 a.m. a 5:00 p.m. Horario dentro del cual se atiende a todos los ciudadanos que lleguen dentro del horario, por lo que no se crean citas para los días siguientes. Siendo la Secretaria de Movidad una ventana de servicio exclusiva por día.
-- Cada turno tiene un trámite específico asociado.
+- Se asume la palabra turno y no cita porque se establece un orden que permite organizar la gestión de los ciudadanos al ingresar a la Secretaria de Movilidad para realizar un trámite especifico
+- Los roles de usuario están predefinidos por la Secretaria de Movilidad, el unico que asigna los roles es el supervisor (no se realizan permisos por simplicidad). 
+- Se asume que cada turno tiene un trámite específico asociado.
+- Se asume que un ciudadano puede tener múltiples turnos, por lo que se realiza una relación uno a muchos entre ciudadano y turno.
+- Se asume que un usuario puede asignar muchos turnos, por lo que se realiza una relación de uno a muchos entre usuario y turno.
+- Se asume que el sistema opera de 9:00 a.m. a 5:00 p.m. Horario dentro del cual se atiende a todos los ciudadanos que lleguen al momento, por lo que no se crean citas para los días siguientes. Siendo la Secretaria de Movidad una ventana de servicio exclusiva por día
 - La fecha y hora de los turnos se almacenan como texto por simplicidad.
 - Se asume la fecha y hora del turno dentro del horario laboral de 9:00 a.m. a 5:00 p.m. Por lo cual se establece el valor de fecha hora del turno como string y no como LocalDateTime por simplicidad.
 - Se asume string fecha hora del turno por términos de practicidad del ejercicio, en caso de tener que modificarlo se levantara el ticket
 - Los turnos, ciudadanos y tramites no se eliminan, solo usuarios; el supervisor o administrador pueden hacerlo (sin embargo dentro del código se agregan la eliminación para fines prácticos de la demostración del CRUD). 
-- Se asume que los empleados recepcionista y gestor tramite contaran con sus permisos y roles ya establecidos, por lo que no se genera el código.
+- Se asume que los empleados recepcionista y gestor tramite contaran con sus permisos y roles ya establecidos, por lo que no se genera permisos en el código por simplicidad.
 - Se asume que la base de datos estar disponible siempre y cuando el sistema este en ejecución
 - Se asume que el registro de la base de datos de todas las tablas será descargada en formato Excel por el administrador del sistema. Por lo cual solo se muestra la información en la base de datos.
 - Se asume que los turnos tendrán dos estados: "En espera" o "Ya atendido" por lo que no se borraran los turnos, solo el administrador podrá realizarlo.
-- Se asume que un ciudadano puede tener múltiples turnos, por lo que se realiza una relación uno a muchos entre ciudadano y turno.
-- Se asume que un usuario puede asignar muchos turnos, por lo que se realiza una relación de uno a muchos entre usuario y turno.
 
 ---
 ## 🛠️ **Diseño del Sistema**

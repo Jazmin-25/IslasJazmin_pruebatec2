@@ -11,9 +11,9 @@ El Sistema de Gestión de Turnos es una solución diseñada para automatizar la 
 La Secretaría de Movilidad requiere un sistema para gestionar turnos de manera eficiente. Los trámites disponibles incluyen:
 - Expedición de licencia de conducir.
 - Reposición de licencia de conducir.
--Renovación de licencia de conducir.
--Corrección de datos.
--Reemplazo por vigencia
+- Renovación de licencia de conducir.
+- Corrección de datos.
+- Reemplazo por vigencia
 
 ---
 ## ✅ **Problemas Resueltos**

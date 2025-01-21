@@ -42,11 +42,11 @@ La Secretaría de Movilidad requiere un sistema para gestionar turnos de manera 
     
 - Los turnos, ciudadanos y tramites no se eliminan, solo usuarios; el supervisor pueden hacerlo (sin embargo dentro del código se agregan la eliminación para fines prácticos de la demostración del CRUD).
     
-- Se asume que la base de datos estar disponible siempre y cuando el sistema este en ejecución
+- Se asume que la base de datos esta disponible siempre y cuando el sistema este en ejecución.
   
-- Se asume que el registro de la base de datos de todas las tablas será descargada en formato Excel por el administrador del sistema. Por lo cual solo se muestra la información en la base de datos.
+- Se asume que el registro de la base de datos de todas las tablas será descargada en formato Excel por el administrador del sistema. Por lo cual solo se muestra la información en la base de datos (por simplicidad).
   
-- Se asume que los turnos tendrán dos estados: "En espera" o "Ya atendido" por lo que no se borraran los turnos, solo el administrador podrá realizarlo.
+- Se asume que los turnos tendrán únicamente dos estados: "En espera" o "Ya atendido" por lo que no se borraran los turnos, solo el administrador podrá realizarlo.
 
 ---
 ## 🛠️ **Diseño del Sistema**
@@ -66,8 +66,8 @@ El sistema está orientado a gestionar turnos diarios (9:00 a.m. a 5:00 p.m.), c
 ---
 ## 🛠️ **Relaciones entre Entidades**
 -	Un ciudadano puede tener múltiples turnos: Relación uno a muchos entre ciudadano y turno.
--	Usuario - Turno: Un usuario puede asignar muchos turnos. Relación de uno a muchos entre usuario y turno.
--	Turno - Trámite: Un turno está asociado a un trámite específico. Esta es una relación de uno a uno.
+-	Un usuario (asignador o administrativo) pueden asignar y gestionar muchos turnos y tramites. Relación de uno a muchos entre usuario y turno, al igual que un usuario y tramite.
+-	Un turno está asociado a un trámite específico. Esta es una relación de uno a uno.
 
 ---
 ## 🔄 **Flujo del Sistema**
@@ -75,19 +75,19 @@ El sistema está orientado a gestionar turnos diarios (9:00 a.m. a 5:00 p.m.), c
 - Cada usuario ingresa con correo y contraseña.
 - Los usuarios son:
 - Recepcionista (asignador): Encargado de registrar turnos.
-- Administrativo (gestor de trámites): Responsable de atender a los ciudadanos.
+- Gestor de trámites (administrativo): Responsable de atender a los ciudadanos.
 - Supervisor (admin): Encargado de la gestión y supervisión general del sistema.
 
 2. **Registro de Turnos**:
 Cuando un ciudadano llega a la Secretaria de Movilidad para realizar un trámite, el recepcionista lo registra:
-- Datos requeridos: Nombre, apellido y teléfono del ciudadano.
+- Datos requeridos: Nombre, apellido y teléfono.
 - Generación automática de un número de turno.
 4. **Gestión de Turnos**:
 En la pantalla del sistema, el gestor de trámites podrá visualizar la fila de turnos asignados por el recepcionista.
 - Estados: "En espera" y "Ya atendido".
 - Gestión en tiempo real por el administrativo.
 5. **Gestión de Usuarios**:
-- Creación de nuevos usuarios con roles específicos por el supervisor.
+- Creación, lectura, modificación y eliminación de usuarios con roles específicos por el supervisor.
 
 ---
 ## 💻 **Tecnologías Utilizadas**
@@ -107,7 +107,7 @@ En la pantalla del sistema, el gestor de trámites podrá visualizar la fila de 
 ## 🚀 **Cómo Ejecutar el Sistema**
 1. Instalar Apache Tomcat y configurar el proyecto.
 2. Importar el esquema SQL en MySQL.
-3. Iniciar sesión en Apache Tomca con las siguientes credenciales:
+3. Iniciar sesión en Apache Tomcat con las siguientes credenciales:
    - Usuario: `admin`
    - Contraseña: `123`
 4. En phpMyAdmin iniciar sesión con las siguientes credenciales:

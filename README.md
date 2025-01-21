@@ -66,7 +66,7 @@ El sistema está orientado a gestionar turnos diarios (9:00 a.m. a 5:00 p.m.), c
 ---
 ## 🛠️ **Relaciones entre Entidades**
 -	Un ciudadano puede tener múltiples turnos: Relación uno a muchos entre ciudadano y turno.
--	Un usuario (asignador o administrativo) pueden asignar y gestionar muchos turnos y tramites. Relación de uno a muchos entre usuario y turno, al igual que un usuario y tramite.
+-	Un usuario (asignador o administrativo) pueden asignar muchos turnos y gestionar muchos tramites. Relación de uno a muchos entre usuario y turno, al igual que un usuario y tramite.
 -	Un turno está asociado a un trámite específico. Esta es una relación de uno a uno.
 
 ---

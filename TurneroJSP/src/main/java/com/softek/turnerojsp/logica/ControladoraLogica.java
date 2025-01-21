@@ -9,7 +9,8 @@ import java.util.List;
 public class ControladoraLogica {//es mi main
 //genero el vinculo entre controlpersistencia y logica
     ControladoraPersistencia controlPersi = new ControladoraPersistencia();
-    
+    //metodo crud
+    //crear
     public void crearCiudadano(String nombre, String apellido, String telefono) {
         Ciudadano ciudad = new Ciudadano(nombre, apellido, telefono);
         controlPersi.crearCiudadano(ciudad);
@@ -33,13 +34,15 @@ public class ControladoraLogica {//es mi main
         y la lógica solo responde los datos ya filtrados desde la BD 
         */
       //la base de datos se encarga de traer todo filtrado
+    
+    //mostrar
     public List<Ciudadano> buscarPorApellido(String busquedaApellido) {
     List<Ciudadano> ciudadanosCoincidentes = new ArrayList<>(); //se puede hacer con programacion funcional
       ciudadanosCoincidentes = controlPersi.buscarPorApellido(busquedaApellido);
         
         return ciudadanosCoincidentes;
     }
-
+//eliminar
     public void eliminarCiudadano(Long id) {
         controlPersi.eliminarCiudadano(id);
     }
@@ -47,7 +50,7 @@ public class ControladoraLogica {//es mi main
     public Ciudadano buscarCiudadano(Long id) {
         return controlPersi.traerCiudadano(id);
     }
-
+//editar
     public void editarCiudadano(Ciudadano ciudad) {
     controlPersi.editarCiudadano(ciudad);
     }

@@ -99,7 +99,7 @@ En la pantalla del sistema, el gestor de trámites podrá visualizar la fila de 
 ---
 ## 💻 **Tecnologías Utilizadas**
 - **Backend**: Java 17 + Servlets.
-- **Frontend**: JSP, Bootstrap, JavaScript.
+- **Frontend**: JSP, Bootstrap, JavaScript (vanilla).
 - **Persistencia**: JPA (Java Persistence API).
 - **Base de Datos**: MySQL.
 
@@ -121,6 +121,7 @@ En la pantalla del sistema, el gestor de trámites podrá visualizar la fila de 
    - Usuario: `root`
    - Contraseña: `  ` (vacio, no lleva ninguna contraseña)
 6.  Probar funcionalidades principales como el registro y gestión de turnos.
+7.  En caso de dudas preguntar, para recibir orientación de ejecución.
 ---
 ## 📦 **Material Entregado**
 1. **Documentación**: Guía completa del sistema.

@@ -2,6 +2,7 @@
 package com.softek.turnerojsp.persistencia;
 
 import com.softek.turnerojsp.logica.Ciudadano;
+import com.softek.turnerojsp.logica.Usuario;
 import com.softek.turnerojsp.persistencia.exceptions.NonexistentEntityException;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.logging.Logger;
 public class ControladoraPersistencia {
 
     CiudadanoJpaController ciudadJpa = new CiudadanoJpaController();
+    UsuarioJpaController usuJpa = new UsuarioJpaController();
+  //  UsuarioJpaController usuJpa = new UsuarioJpaController();
     
     public void crearCiudadano(Ciudadano ciudad) {
        //llamo jpaController y le paso a la persona para crearlo
@@ -47,6 +50,10 @@ public class ControladoraPersistencia {
         } catch (Exception ex) {
             Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    /////---------------------USUARIO-----------------------
+    public Usuario buscarUsuario(String email) {
+      return usuJpa.findUserByEmail(email);
     }
 
 }

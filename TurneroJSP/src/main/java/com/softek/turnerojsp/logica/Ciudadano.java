@@ -2,10 +2,13 @@
 package com.softek.turnerojsp.logica;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Ciudadano implements Serializable {
@@ -15,17 +18,24 @@ public class Ciudadano implements Serializable {
     private String nombre;
     private String apellido;
     private String  telefono;
+    @OneToMany(mappedBy = "ciudadano", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Turno> listaturnos;
 
+    
     //Constructor vacio
     public Ciudadano() {
     }
     
     //Constructor con atributos
-    public Ciudadano(String nombre, String apellido, String telefono) {
+
+    public Ciudadano(Long id, String nombre, String apellido, String telefono, List<Turno> listaturnos) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
-    }   
+        this.listaturnos = listaturnos;
+    }
+    
     
     //geters y seters
 
@@ -60,13 +70,14 @@ public class Ciudadano implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
-    
-    //tostring
 
-    @Override
-    public String toString() {
-        return "Ciudadano{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + '}';
+    public List<Turno> getListaturnos() {
+        return listaturnos;
     }
-        
+
+    public void setListaturnos(List<Turno> listaturnos) {
+        this.listaturnos = listaturnos;
+    }
+    
+            
 }

@@ -11,6 +11,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
     <body>
+        <!<!-- usuario -->
+        <%
+            String usu = (String) request.getSession().getAttribute("email");
+            if (usu != null) {
+
+        %>
+        <p style="float: right" clas="m-4">Bienvenido <%=usu%></p>
+        <!<!-- Formulario ciudadanos -->
         <h1>Registro de ciudadanos</h1>
         <div class="container mt-4">
             <!--<!-- Formulario alta -->
@@ -110,3 +118,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </body>
 </html>
+% } 
+else {
+    response.sendRedirect("login.jsp");
+}
+%>

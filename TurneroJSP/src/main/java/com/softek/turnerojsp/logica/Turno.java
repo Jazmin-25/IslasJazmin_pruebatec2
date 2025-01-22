@@ -21,8 +21,7 @@ public class Turno implements Serializable{
     @Enumerated(EnumType.STRING)
     private NumeroTurno numero_turno;
     private String fecha_hora;
-    @Enumerated(EnumType.STRING)
-    private Estado estado; //en espera o atendido
+    private String estado; //en espera o atendido
     //el turno puede ver el tramite
     private Tramite untramite;
     
@@ -44,7 +43,7 @@ public class Turno implements Serializable{
     }
     //constructor con atributos
 
-    public Turno(Long id, NumeroTurno numero_turno, String fecha_hora, Estado estado, Tramite untramite, Ciudadano ciudadano, Usuario usuario, Tramite tramite) {
+ public Turno(Long id, NumeroTurno numero_turno, String fecha_hora, String estado, Tramite untramite, Ciudadano ciudadano, Usuario usuario, Tramite tramite) {
         this.id = id;
         this.numero_turno = numero_turno;
         this.fecha_hora = fecha_hora;
@@ -54,13 +53,13 @@ public class Turno implements Serializable{
         this.usuario = usuario;
         this.tramite = tramite;
     }
-    
+   
     //geters y seter
-    public Long getId(){
+public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {   
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,11 +79,11 @@ public class Turno implements Serializable{
         this.fecha_hora = fecha_hora;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -116,27 +115,26 @@ public class Turno implements Serializable{
         return tramite;
     }
 
-    
-    public void setTramite(Tramite tramite) {    
+    public void setTramite(Tramite tramite) {
         this.tramite = tramite;
     }
 
-    // metodo para cambiar el estado a en espera
-    public void marcarEspera() {
-        this.estado = Estado.EN_ESPERA;
-    }
     
-    public void marcarAtendido() {
-        this.estado = Estado.ATENDIDO;
-    }
-
-
    //tostring
     @Override
-    public String toString() {
-        return "Turno{" + "id=" + id + ", numero_turno=" + numero_turno + ", fecha_hora=" + fecha_hora + ", estado=" + estado + ", untramite=" + untramite + ", ciudadano=" + ciudadano + ", usuario=" + usuario + ", tramite=" + tramite + '}';
-    }
-    //Turno id 55 numero_turno 4, fecha_hora 21-01-2025, estado= en espera, 
- //un tramite= modificacion de datos, ciudadano= Ariadna Islas 55555 usuario Juan Rulfo tramite modificacion de datos
+public String toString() {
+    return "Turno {" +
+            "id=" + id +
+            ", número de turno='" + numero_turno + '\'' +
+            ", fecha y hora='" + fecha_hora + '\'' +
+            ", estado='" + estado + '\'' +
+            ", trámite=" + untramite + 
+            ", ciudadano=" + ciudadano + 
+            ", usuario=" + usuario + 
+            '}';
+}//Mi idea es que se ordene de la siguiente manera:
+//Turno id=1, número de turno='Turno_1', fecha y hora='2023-11-22 10:30:00', 
+//estado='en espera', trámite='Renovación de licencia', ciudadano='Juan Pérez', usuario='María López'}
+    
     
 }

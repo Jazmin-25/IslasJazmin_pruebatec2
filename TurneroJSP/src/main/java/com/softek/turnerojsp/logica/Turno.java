@@ -4,6 +4,8 @@ package com.softek.turnerojsp.logica;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,9 +18,11 @@ public class Turno implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long numero_turno;
+    @Enumerated(EnumType.STRING)
+    private NumeroTurno numero_turno;
     private String fecha_hora;
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private Estado estado; //en espera o atendido
     //el turno puede ver el tramite
     private Tramite untramite;
     
@@ -40,7 +44,7 @@ public class Turno implements Serializable{
     }
     //constructor con atributos
 
-    public Turno(Long id, Long numero_turno, String fecha_hora, String estado, Tramite untramite, Ciudadano ciudadano, Usuario usuario, Tramite tramite) {
+    public Turno(Long id, NumeroTurno numero_turno, String fecha_hora, Estado estado, Tramite untramite, Ciudadano ciudadano, Usuario usuario, Tramite tramite) {
         this.id = id;
         this.numero_turno = numero_turno;
         this.fecha_hora = fecha_hora;
@@ -50,25 +54,21 @@ public class Turno implements Serializable{
         this.usuario = usuario;
         this.tramite = tramite;
     }
-
-    
-     
     
     //geters y seter
-
-    public Long getId() {
+    public Long getId(){
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id) {   
         this.id = id;
     }
 
-    public Long getNumero_turno() {
+    public NumeroTurno getNumero_turno() {
         return numero_turno;
     }
 
-    public void setNumero_turno(Long numero_turno) {
+    public void setNumero_turno(NumeroTurno numero_turno) {
         this.numero_turno = numero_turno;
     }
 
@@ -80,11 +80,11 @@ public class Turno implements Serializable{
         this.fecha_hora = fecha_hora;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -116,18 +116,27 @@ public class Turno implements Serializable{
         return tramite;
     }
 
-    public void setTramite(Tramite tramite) {
+    
+    public void setTramite(Tramite tramite) {    
         this.tramite = tramite;
     }
 
-    
-   //tostring
-
-    @Override
-    public String toString() {
-        return "Turno{" + "id=" + id + ", numero_turno=" + numero_turno + ", fecha_hora=" + fecha_hora + ", estado=" + estado + '}';
+    // metodo para cambiar el estado a en espera
+    public void marcarEspera() {
+        this.estado = Estado.EN_ESPERA;
     }
     
+    public void marcarAtendido() {
+        this.estado = Estado.ATENDIDO;
+    }
 
+
+   //tostring
+    @Override
+    public String toString() {
+        return "Turno{" + "id=" + id + ", numero_turno=" + numero_turno + ", fecha_hora=" + fecha_hora + ", estado=" + estado + ", untramite=" + untramite + ", ciudadano=" + ciudadano + ", usuario=" + usuario + ", tramite=" + tramite + '}';
+    }
+    //Turno id 55 numero_turno 4, fecha_hora 21-01-2025, estado= en espera, 
+ //un tramite= modificacion de datos, ciudadano= Ariadna Islas 55555 usuario Juan Rulfo tramite modificacion de datos
     
 }

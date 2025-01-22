@@ -1,17 +1,19 @@
+
 package com.softek.turnerojsp.persistencia;
 
+import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import com.softek.turnerojsp.logica.Turno;
 import com.softek.turnerojsp.logica.Usuario;
 import com.softek.turnerojsp.persistencia.exceptions.NonexistentEntityException;
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 
 public class UsuarioJpaController implements Serializable {
@@ -20,10 +22,10 @@ public class UsuarioJpaController implements Serializable {
         this.emf = emf;
     }
     
-    public UsuarioJpaController() {
+     public UsuarioJpaController() {
         emf = Persistence.createEntityManagerFactory("turneroJspPU");
     }
-    
+
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -31,11 +33,29 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void create(Usuario usuario) {
+        if (usuario.getTurnos() == null) {
+            usuario.setTurnos(new ArrayList<Turno>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Turno> attachedTurnos = new ArrayList<Turno>();
+            for (Turno turnosTurnoToAttach : usuario.getTurnos()) {
+                turnosTurnoToAttach = em.getReference(turnosTurnoToAttach.getClass(), turnosTurnoToAttach.getId());
+                attachedTurnos.add(turnosTurnoToAttach);
+            }
+            usuario.setTurnos(attachedTurnos);
             em.persist(usuario);
+            for (Turno turnosTurno : usuario.getTurnos()) {
+                Usuario oldUsuarioOfTurnosTurno = turnosTurno.getUsuario();
+                turnosTurno.setUsuario(usuario);
+                turnosTurno = em.merge(turnosTurno);
+                if (oldUsuarioOfTurnosTurno != null) {
+                    oldUsuarioOfTurnosTurno.getTurnos().remove(turnosTurno);
+                    oldUsuarioOfTurnosTurno = em.merge(oldUsuarioOfTurnosTurno);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -49,7 +69,34 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Usuario persistentUsuario = em.find(Usuario.class, usuario.getId());
+            List<Turno> turnosOld = persistentUsuario.getTurnos();
+            List<Turno> turnosNew = usuario.getTurnos();
+            List<Turno> attachedTurnosNew = new ArrayList<Turno>();
+            for (Turno turnosNewTurnoToAttach : turnosNew) {
+                turnosNewTurnoToAttach = em.getReference(turnosNewTurnoToAttach.getClass(), turnosNewTurnoToAttach.getId());
+                attachedTurnosNew.add(turnosNewTurnoToAttach);
+            }
+            turnosNew = attachedTurnosNew;
+            usuario.setTurnos(turnosNew);
             usuario = em.merge(usuario);
+            for (Turno turnosOldTurno : turnosOld) {
+                if (!turnosNew.contains(turnosOldTurno)) {
+                    turnosOldTurno.setUsuario(null);
+                    turnosOldTurno = em.merge(turnosOldTurno);
+                }
+            }
+            for (Turno turnosNewTurno : turnosNew) {
+                if (!turnosOld.contains(turnosNewTurno)) {
+                    Usuario oldUsuarioOfTurnosNewTurno = turnosNewTurno.getUsuario();
+                    turnosNewTurno.setUsuario(usuario);
+                    turnosNewTurno = em.merge(turnosNewTurno);
+                    if (oldUsuarioOfTurnosNewTurno != null && !oldUsuarioOfTurnosNewTurno.equals(usuario)) {
+                        oldUsuarioOfTurnosNewTurno.getTurnos().remove(turnosNewTurno);
+                        oldUsuarioOfTurnosNewTurno = em.merge(oldUsuarioOfTurnosNewTurno);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -78,6 +125,11 @@ public class UsuarioJpaController implements Serializable {
                 usuario.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
+            }
+            List<Turno> turnos = usuario.getTurnos();
+            for (Turno turnosTurno : turnos) {
+                turnosTurno.setUsuario(null);
+                turnosTurno = em.merge(turnosTurno);
             }
             em.remove(usuario);
             em.getTransaction().commit();
@@ -133,23 +185,9 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     Usuario findUserByEmail(String email) {
-            
-        EntityManager em =getEntityManager();
-        
-        try {
-            //consulta JPQL para buscar por apellido
-            String consulta = "SELECT usu FROM Usuario usu WHERE usu.email = :email";
-            Query query = em.createQuery(consulta);
-            query.setParameter("email",email);
-            return (Usuario) query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
-        finally {
-            em.close();
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

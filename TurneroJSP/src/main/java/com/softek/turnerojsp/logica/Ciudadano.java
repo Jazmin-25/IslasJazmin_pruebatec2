@@ -18,7 +18,8 @@ public class Ciudadano implements Serializable {
     private String nombre;
     private String apellido;
     private String  telefono;
-    @OneToMany(mappedBy = "ciudadano", cascade = CascadeType.ALL, orphanRemoval = true)
+    //un ciudadano puede tener varios turbos y el turno puede ver al ciudadano 
+    @OneToMany(mappedBy = "ciudadano", cascade = CascadeType.ALL, orphanRemoval = true) 
     private List<Turno> listaturnos;
 
     
@@ -35,14 +36,13 @@ public class Ciudadano implements Serializable {
         this.telefono = telefono;
         this.listaturnos = listaturnos;
     }
-    
-    
-    //geters y seters
 
+    
     public Long getId() {
         return id;
     }
 
+    //geters y seters
     public void setId(Long id) {
         this.id = id;
     }

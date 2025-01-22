@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -14,9 +16,11 @@ public class Tramite implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descripcion;
+    //Un turno esta asociado a un tramite especifico
+    //el lado propietario de la relación es la clase Turno
     @OneToOne(mappedBy = "tramite", cascade = CascadeType.ALL)
     private Turno turno;
-
+   
     
     //constructor vacio
     public Tramite() {
@@ -24,12 +28,10 @@ public class Tramite implements Serializable {
     
     //constructor con atributos
 
-    public Tramite(Long id, String descripcion, Turno turno) {
-        this.id = id;
+    public Tramite(String descripcion, Turno turno, Usuario usuario) {
         this.descripcion = descripcion;
         this.turno = turno;
     }
-
     
     //geters y seter
 
@@ -57,10 +59,4 @@ public class Tramite implements Serializable {
         this.turno = turno;
     }
 
-    //El tramite 44 correccion de datos tiene el turno 60
-    
-    
-    
-    
-    
 }

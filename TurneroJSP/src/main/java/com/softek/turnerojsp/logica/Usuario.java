@@ -17,22 +17,24 @@ public class Usuario implements Serializable{
     private Long id;
     private String email;
     private String password;
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Turno> turnos;
-
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Tramite> tramites;
     
      //constructor vacio
      public Usuario() {
     }
     //constructor con atributos
 
-    public Usuario(Long id, String email, String password, List<Turno> turnos) {
-        this.id = id;
+    public Usuario(String email, String password, List<Turno> turnos, List<Tramite> tramites) {
         this.email = email;
         this.password = password;
         this.turnos = turnos;
+        this.tramites = tramites;
     }
-    
+
+        
     //geters y seter
 
     public Long getId() {
@@ -59,11 +61,21 @@ public class Usuario implements Serializable{
         this.password = password;
     }
 
-    //tostring
-
-    @Override
-    public String toString() {
-        return "Usuario{" + "id=" + id + ", email=" + email + ", password=" + password + '}';
+    public List<Turno> getTurnos() {
+        return turnos;
     }
+
+    public void setTurnos(List<Turno> turnos) {
+        this.turnos = turnos;
+    }
+
+    public List<Tramite> getTramites() {
+        return tramites;
+    }
+
+    public void setTramites(List<Tramite> tramites) {
+        this.tramites = tramites;
+    }
+    
     
 }

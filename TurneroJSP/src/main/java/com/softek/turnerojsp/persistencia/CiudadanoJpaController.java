@@ -2,20 +2,22 @@
 package com.softek.turnerojsp.persistencia;
 
 import com.softek.turnerojsp.logica.Ciudadano;
-import com.softek.turnerojsp.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import com.softek.turnerojsp.logica.Turno;
+import com.softek.turnerojsp.persistencia.exceptions.NonexistentEntityException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 
 public class CiudadanoJpaController implements Serializable {
-    
+
     public CiudadanoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -23,6 +25,7 @@ public class CiudadanoJpaController implements Serializable {
     public CiudadanoJpaController(){
         emf = Persistence.createEntityManagerFactory("turneroJspPU");
     }
+    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -30,11 +33,29 @@ public class CiudadanoJpaController implements Serializable {
     }
 
     public void create(Ciudadano ciudadano) {
+        if (ciudadano.getListaturnos() == null) {
+            ciudadano.setListaturnos(new ArrayList<Turno>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Turno> attachedListaturnos = new ArrayList<Turno>();
+            for (Turno listaturnosTurnoToAttach : ciudadano.getListaturnos()) {
+                listaturnosTurnoToAttach = em.getReference(listaturnosTurnoToAttach.getClass(), listaturnosTurnoToAttach.getId());
+                attachedListaturnos.add(listaturnosTurnoToAttach);
+            }
+            ciudadano.setListaturnos(attachedListaturnos);
             em.persist(ciudadano);
+            for (Turno listaturnosTurno : ciudadano.getListaturnos()) {
+                Ciudadano oldCiudadanoOfListaturnosTurno = listaturnosTurno.getCiudadano();
+                listaturnosTurno.setCiudadano(ciudadano);
+                listaturnosTurno = em.merge(listaturnosTurno);
+                if (oldCiudadanoOfListaturnosTurno != null) {
+                    oldCiudadanoOfListaturnosTurno.getListaturnos().remove(listaturnosTurno);
+                    oldCiudadanoOfListaturnosTurno = em.merge(oldCiudadanoOfListaturnosTurno);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -48,7 +69,34 @@ public class CiudadanoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Ciudadano persistentCiudadano = em.find(Ciudadano.class, ciudadano.getId());
+            List<Turno> listaturnosOld = persistentCiudadano.getListaturnos();
+            List<Turno> listaturnosNew = ciudadano.getListaturnos();
+            List<Turno> attachedListaturnosNew = new ArrayList<Turno>();
+            for (Turno listaturnosNewTurnoToAttach : listaturnosNew) {
+                listaturnosNewTurnoToAttach = em.getReference(listaturnosNewTurnoToAttach.getClass(), listaturnosNewTurnoToAttach.getId());
+                attachedListaturnosNew.add(listaturnosNewTurnoToAttach);
+            }
+            listaturnosNew = attachedListaturnosNew;
+            ciudadano.setListaturnos(listaturnosNew);
             ciudadano = em.merge(ciudadano);
+            for (Turno listaturnosOldTurno : listaturnosOld) {
+                if (!listaturnosNew.contains(listaturnosOldTurno)) {
+                    listaturnosOldTurno.setCiudadano(null);
+                    listaturnosOldTurno = em.merge(listaturnosOldTurno);
+                }
+            }
+            for (Turno listaturnosNewTurno : listaturnosNew) {
+                if (!listaturnosOld.contains(listaturnosNewTurno)) {
+                    Ciudadano oldCiudadanoOfListaturnosNewTurno = listaturnosNewTurno.getCiudadano();
+                    listaturnosNewTurno.setCiudadano(ciudadano);
+                    listaturnosNewTurno = em.merge(listaturnosNewTurno);
+                    if (oldCiudadanoOfListaturnosNewTurno != null && !oldCiudadanoOfListaturnosNewTurno.equals(ciudadano)) {
+                        oldCiudadanoOfListaturnosNewTurno.getListaturnos().remove(listaturnosNewTurno);
+                        oldCiudadanoOfListaturnosNewTurno = em.merge(oldCiudadanoOfListaturnosNewTurno);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -77,6 +125,11 @@ public class CiudadanoJpaController implements Serializable {
                 ciudadano.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The ciudadano with id " + id + " no longer exists.", enfe);
+            }
+            List<Turno> listaturnos = ciudadano.getListaturnos();
+            for (Turno listaturnosTurno : listaturnos) {
+                listaturnosTurno.setCiudadano(null);
+                listaturnosTurno = em.merge(listaturnosTurno);
             }
             em.remove(ciudadano);
             em.getTransaction().commit();
@@ -132,8 +185,7 @@ public class CiudadanoJpaController implements Serializable {
             em.close();
         }
     }
-    
-     //método para filtrar ciudadanos por apellido en la BD
+    //método para filtrar ciudadanos por apellido en la BD
     public List<Ciudadano> findCiudadanoByApellido (String busquedaApellido) {
         EntityManager em =getEntityManager();
         
@@ -146,8 +198,6 @@ public class CiudadanoJpaController implements Serializable {
             return query.getResultList();
         } finally {
             em.close();
-        }
-
-    
+        } 
 }
 }

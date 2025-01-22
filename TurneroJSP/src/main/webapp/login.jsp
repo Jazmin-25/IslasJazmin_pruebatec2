@@ -11,7 +11,7 @@
        <div class="global-container">
 	<div class="card login-form">
 	<div class="card-body">
-		<h3 class="card-title text-center">Log in to PersonaJSP</h3>
+		<h3 class="card-title text-center">Sistema de Gestión de Turnos</h3>
 		<div class="card-text">
 			<!--
 			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->

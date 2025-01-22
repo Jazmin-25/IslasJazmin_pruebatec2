@@ -4,8 +4,6 @@ package com.softek.turnerojsp.logica;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,45 +16,42 @@ public class Turno implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private NumeroTurno numero_turno;
+    private String numeroTurno;
     private String fecha_hora;
     private String estado; //en espera o atendido
-    //el turno puede ver el tramite
-    private Tramite untramite;
     
-    @ManyToOne (cascade = CascadeType.ALL)
-    
-    @JoinColumn(name = "ciudadano_id", nullable = false)
-    private Ciudadano ciudadano;
-
+    // relación con Ciudadano (Muchos a un)
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
-
+    @JoinColumn(name = "ciudadano_id")
+    private Ciudadano ciudadano;
+    
+    //el turno puede ver el tramite
+    // Relación con Tramite (Uno a uno)
     @OneToOne
-    @JoinColumn(name = "tramite_id", nullable = false)
+    @JoinColumn(name = "tramite_id")
     private Tramite tramite;
+
+    // relación con Usuario (Muchos a uno)
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
     
-    
+ 
     //constructor vacio
+
     public Turno() {
     }
-    //constructor con atributos
 
- public Turno(Long id, NumeroTurno numero_turno, String fecha_hora, String estado, Tramite untramite, Ciudadano ciudadano, Usuario usuario, Tramite tramite) {
-        this.id = id;
-        this.numero_turno = numero_turno;
+    public Turno(String numeroTurno, String fecha_hora, String estado, Tramite tramite, Ciudadano ciudadano, Usuario usuario) {
+        this.numeroTurno = numeroTurno;
         this.fecha_hora = fecha_hora;
         this.estado = estado;
-        this.untramite = untramite;
+        this.tramite = tramite;
         this.ciudadano = ciudadano;
         this.usuario = usuario;
-        this.tramite = tramite;
     }
-   
-    //geters y seter
-public Long getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -64,12 +59,12 @@ public Long getId() {
         this.id = id;
     }
 
-    public NumeroTurno getNumero_turno() {
-        return numero_turno;
+    public String getNumeroTurno() {
+        return numeroTurno;
     }
 
-    public void setNumero_turno(NumeroTurno numero_turno) {
-        this.numero_turno = numero_turno;
+    public void setNumeroTurno(String numeroTurno) {
+        this.numeroTurno = numeroTurno;
     }
 
     public String getFecha_hora() {
@@ -88,12 +83,12 @@ public Long getId() {
         this.estado = estado;
     }
 
-    public Tramite getUntramite() {
-        return untramite;
+    public Tramite getTramite() {
+        return tramite;
     }
 
-    public void setUntramite(Tramite untramite) {
-        this.untramite = untramite;
+    public void setTramite(Tramite tramite) {
+        this.tramite = tramite;
     }
 
     public Ciudadano getCiudadano() {
@@ -111,18 +106,5 @@ public Long getId() {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    public Tramite getTramite() {
-        return tramite;
-    }
-
-    public void setTramite(Tramite tramite) {
-        this.tramite = tramite;
-    }
-
-    //Mi idea es que se ordene de la siguiente manera:
-//Turno id=1, número de turno='Turno_1', fecha y hora='2023-11-22 10:30:00', 
-//estado='en espera', trámite='Renovación de licencia', ciudadano='Juan Pérez', usuario='María López'}
-    
     
 }

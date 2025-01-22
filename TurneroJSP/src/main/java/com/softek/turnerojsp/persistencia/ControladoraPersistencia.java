@@ -14,6 +14,8 @@ public class ControladoraPersistencia {
 
     CiudadanoJpaController ciudadJpa = new CiudadanoJpaController();
     UsuarioJpaController usuJpa = new UsuarioJpaController();
+    TramiteJpaController tramJpa = new TramiteJpaController();
+    TurnoJpaController turnJpa = new TurnoJpaController();
   //  UsuarioJpaController usuJpa = new UsuarioJpaController();
     
     public void crearCiudadano(Ciudadano ciudad) {

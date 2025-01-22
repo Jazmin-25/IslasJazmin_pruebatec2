@@ -25,7 +25,8 @@ public class Turno implements Serializable{
     //el turno puede ver el tramite
     private Tramite untramite;
     
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
+    
     @JoinColumn(name = "ciudadano_id", nullable = false)
     private Ciudadano ciudadano;
 
@@ -119,20 +120,7 @@ public Long getId() {
         this.tramite = tramite;
     }
 
-    
-   //tostring
-    @Override
-public String toString() {
-    return "Turno {" +
-            "id=" + id +
-            ", número de turno='" + numero_turno + '\'' +
-            ", fecha y hora='" + fecha_hora + '\'' +
-            ", estado='" + estado + '\'' +
-            ", trámite=" + untramite + 
-            ", ciudadano=" + ciudadano + 
-            ", usuario=" + usuario + 
-            '}';
-}//Mi idea es que se ordene de la siguiente manera:
+    //Mi idea es que se ordene de la siguiente manera:
 //Turno id=1, número de turno='Turno_1', fecha y hora='2023-11-22 10:30:00', 
 //estado='en espera', trámite='Renovación de licencia', ciudadano='Juan Pérez', usuario='María López'}
     

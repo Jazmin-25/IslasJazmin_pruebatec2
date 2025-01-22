@@ -57,13 +57,6 @@ public class Tramite implements Serializable {
         this.turno = turno;
     }
 
-    
-    //to string
-
-    @Override
-    public String toString() {
-        return "Tramite{" + "id=" + id + ", descripcion=" + descripcion + "tiene el turno=" + turno + '}';
-    } 
     //El tramite 44 correccion de datos tiene el turno 60
     
     

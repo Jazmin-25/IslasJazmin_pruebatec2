@@ -12,6 +12,7 @@
 	<div class="card login-form">
 	<div class="card-body">
 		<h3 class="card-title text-center">Sistema de Gestión de Turnos</h3>
+                <!<!-- Cada usuario ingresa con correo y contraseña -->
 		<div class="card-text">
 			<!--
 			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->

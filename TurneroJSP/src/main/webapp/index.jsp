@@ -18,9 +18,10 @@
     <p style="float: right" class="m-4">Bienvenido <%= usu %></p>
     
     <!-- Formulario ciudadanos -->
+    <!<!-- Registro de Turnos -->
     <h1>Registro de ciudadanos</h1>
     <div class="container mt-4">
-        <!-- Formulario alta -->
+        <!-- Formulario alta de ciudadano -->
         <h2>Formulario de registro</h2>
         <form action="CiudadanoSv" method="POST">
             <div class="form-group">
@@ -81,6 +82,7 @@
                             </form>
                         </td>
                     </tr>
+                     <--<!-- Se genera autimaticamente el numero de turno, en mi backen tengo que llamar al numeroTurno -->
                     <%
                             }
                         }

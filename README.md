@@ -75,8 +75,7 @@ El sistema está orientado a gestionar turnos diarios (9:00 a.m. a 5:00 p.m.), c
 - Un turno es atendido o gestionado por un solo usuario (relación de n a 1).
 - Un usuario puede gestionar varios turnos (relación de 1 a n).
   
----
-**Diagrama UML**
+**Diagrama UML:**
 
 ![Diagrama UML](https://github.com/Jazmin-25/IslasJazmin_pruebatec2/blob/main/DiagramaDefinitivoElbueno.drawio.png)
 

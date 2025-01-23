@@ -14,7 +14,7 @@
     </head>
     <body>
         <!-- antes de registrar al ciudadano -->
-        <form action="LoginSv" method="GET">
+        <form action="UsuarioSv" method="GET">
 				<!-- to error: add class "has-danger" -->
 				<div class="form-group">
 					<label for="exampleInputEmail1">Email</label>

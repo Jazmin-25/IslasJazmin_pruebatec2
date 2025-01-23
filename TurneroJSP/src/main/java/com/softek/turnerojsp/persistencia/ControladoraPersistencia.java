@@ -32,7 +32,7 @@ public class ControladoraPersistencia {
         return ciudadJpa.findCiudadanoByApellido(busquedaApellido);
 
          }
-//borrado fisico, debo hacer borrado logico
+//borrado fisico
     public void eliminarCiudadano(Long id) {
         try {
             ciudadJpa.destroy(id);

@@ -16,7 +16,7 @@
         <h1>Gestión de trámite</h1>
         <h3>Estatus del tramite:</h3>
 
-        <form class="user" action="EditarTurnosSv" method="POST">
+        <form class="user" action="EditarTurnoSv" method="POST">
             <!--numeroturno-->
             <div class="col-sm-6 mb-3">
 
@@ -76,7 +76,7 @@
                 </button>
 
                 <!-- Busqueda de turno atendido -->
-                <form action="EditarTurnosSv" method="GET">
+                <form action="EditarTurnoSv" method="GET">
                     <div class="form-group">
                         <label for="busquedaAtendido">Buscar tramites atendidos:</label>
                         <input type="text" class="form-control" id="busquedaAtendido" name="busquedaAtendido">

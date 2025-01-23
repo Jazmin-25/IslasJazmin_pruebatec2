@@ -1,30 +1,33 @@
-package com.softek.turnerojsp.logica;
+package com.softek.pruebatecnica2.logica;
 
-import com.softek.turnerojsp.persistencia.ControladoraPersistencia;
+import com.softek.pruebatecnica2.persistencia.ControladoraPersistencia;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControladoraLogica {//es mi main
+public class ControladoraLogica { //es el main
+
 //genero el vinculo entre controlpersistencia y logica
-
     ControladoraPersistencia controlPersi = new ControladoraPersistencia();
+    
 
-    //crearCiudadano
     public void crearCiudadano(String nombre, String apellido, String telefono) {
-        // Inicio una lista vacía para los turnos, para evitar el erro
+         // Inicio una lista vacía para los turnos, para evitar el erro
         List<Turno> listaTurnos = new ArrayList<>(); // Creamos el ciudadano con la lista vacía
-        Ciudadano ciudad = new Ciudadano(null, nombre, apellido, telefono, listaTurnos);
+        Ciudadano ciudad = new Ciudadano();
+        ciudad.setNombre(nombre);
+        ciudad.setApellido(apellido);
+        ciudad.setTelefono(telefono);
+
         controlPersi.crearCiudadano(ciudad);
     }
-
-    //mostrarapellido de Ciudadano
+    //mostrarCiudadano
     public List<Ciudadano> buscarPorApellido(String busquedaApellido) {
         List<Ciudadano> ciudadanosCoincidentes = new ArrayList<>(); 
         ciudadanosCoincidentes = controlPersi.buscarPorApellido(busquedaApellido);
 
         return ciudadanosCoincidentes;
     }
-
+    
     //eliminarCiudadano
     public void eliminarCiudadano(Long id) {
         controlPersi.eliminarCiudadano(id);
@@ -39,20 +42,10 @@ public class ControladoraLogica {//es mi main
         controlPersi.editarCiudadano(ciudad);
     }
     
-    //crearusuario
-
-    //BuscarUsuario
-    public boolean validarAcceso(String email, String password) {
-        Usuario usu = controlPersi.buscarUsuario(email);
-        //vamos a  manipular contraseñas en texto plano lo cual no es una muy buena práctica de seguridad
-        if (usu != null) {
-            if (usu.getEmail().equals(email)) {
-                if (usu.getPassword().equals(password)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    
+    
+    /////---------------------USUARIO-----------------------
+    public Usuario buscarUsuario(String email) {
+      //return usuJpa.findUserByEmail(email);
     }
-
 }

@@ -52,11 +52,7 @@ La Secretaría de Movilidad requiere un sistema para gestionar turnos de manera 
 
 ---
 ## 🛠️ **Diseño del Sistema**
-El sistema está orientado a gestionar turnos diarios (9:00 a.m. a 5:00 p.m.), con los siguientes roles:
-
-1. **Recepcionista (asignador)**: Asigna turnos a los ciudadanos.
-2. **Gestor de trámites (administrativo)**: Atiende a los ciudadanos en el orden asignado.
-3. **Super usuario (admin)**: Super usuario que realiza las actividades.
+El sistema está orientado a gestionar turnos diarios (9:00 a.m. a 5:00 p.m.), con un único super usuario.
 
 ---
 ## 📋 **Entidades del Sistema**

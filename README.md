@@ -128,8 +128,10 @@ El usuario puede:
 4. En phpMyAdmin iniciar sesión con las siguientes credenciales:
    - Usuario: `root`
    - Contraseña: `  ` (vacio, no lleva ninguna contraseña)
+   - Utilizar la base de datos turnero
 6.  Probar funcionalidades principales como el registro y gestión de turnos.
 7.  En caso de dudas preguntar, para recibir orientación de ejecución.
+8.  
 ---
 ## 📦 **Material Entregado**
 1. **Documentación**: Guía completa del sistema.

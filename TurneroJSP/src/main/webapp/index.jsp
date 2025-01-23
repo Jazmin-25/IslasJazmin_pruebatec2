@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <!-- usuario -->
+    <!-------------------- usuario --------------------------------------->
     <%
         String usu = (String) request.getSession().getAttribute("email");
         if (usu != null) {
@@ -18,7 +18,6 @@
     <p style="float: right" class="m-4">Bienvenido <%= usu %></p>
     
     <!-- Formulario ciudadanos -->
-    <!<!-- Registro de Turnos -->
     <h1>Registro de ciudadanos</h1>
     <div class="container mt-4">
         <!-- Formulario alta de ciudadano -->

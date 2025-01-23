@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 
 @WebServlet(name = "LoginSv", urlPatterns = {"/LoginSv"})
-public class InicioSesion extends HttpServlet {
+public class LoginSv extends HttpServlet {
 
     ControladoraLogica control = new ControladoraLogica();
     

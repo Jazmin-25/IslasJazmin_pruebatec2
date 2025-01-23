@@ -30,23 +30,25 @@ La Secretaría de Movilidad requiere un sistema para gestionar turnos de manera 
 ## 📝 **Supuestos del Sistema**
 - Se asume la palabra turno y no cita porque se establece un orden que permite organizar la gestión de los ciudadanos al ingresar a la Secretaria de Movilidad para realizar un trámite especifico.
   
-- Los roles de usuario están predefinidos por la Secretaria de Movilidad, el unico que asigna los roles es el supervisor (no se realizan permisos por simplicidad).
+- Existe un super usuario que realiza todas las actividades (no se realizan permisos por simplicidad).
+
+- Se asume que un trámite puede estar asociado a varios turnos (relación de 1 a n).
   
-- Se asume que cada turno tiene un trámite específico asociado.
+- Se asume que un turno solo está relacionado con un trámite específico (relación de n a 1).
   
-- Se asume que un ciudadano puede tener múltiples turnos, por lo que se realiza una relación uno a muchos entre ciudadano y turno.
+- Se asume que un turno puede ser solicitado por un solo ciudadano (relación de n a 1).
   
-- Se asume que un usuario puede asignar muchos turnos, por lo que se realiza una relación de uno a muchos entre usuario y turno.
+- Se asume que un ciudadano puede tener varios turnos (relación de 1 a n).
   
-- Se asume que el sistema opera de 9:00 a.m. a 5:00 p.m. Horario dentro del cual se atiende a todos los ciudadanos que lleguen al momento, por lo que no se crean citas para los días siguientes. Siendo la Secretaria de Movidad una ventana de servicio exclusiva por día. Por lo cual se establece el valor de fecha hora del turno como string y no como LocalDateTime por simplicidad.
-    
-- Los turnos, ciudadanos y tramites no se eliminan, solo usuarios; el supervisor pueden hacerlo (sin embargo dentro del código se agregan la eliminación para fines prácticos de la demostración del CRUD).
+- Se asume que un turno es atendido o gestionado por un solo usuario (relación de n a 1).
+  
+- Se asume que un usuario puede gestionar varios turnos (relación de 1 a n).
+  
+- Se asume que el sistema opera de 9:00 a.m. a 5:00 p.m. Horario dentro del cual se atiende a todos los ciudadanos que lleguen al momento, por lo que no se crean citas para los días siguientes. Siendo la Secretaria de Movidad una ventana de servicio exclusiva por día. Por lo cual se establece el valor de fecha hora del turno como string y no como LocalDateTime por simplicidad.  
     
 - Se asume que la base de datos esta disponible siempre y cuando el sistema este en ejecución.
   
-- Se asume que el registro de la base de datos de todas las tablas será descargada en formato Excel por el administrador del sistema. Por lo cual solo se muestra la información en la base de datos (por simplicidad).
-  
-- Se asume que los turnos tendrán únicamente dos estados: "En espera" o "Ya atendido" por lo que no se borraran los turnos, solo el administrador podrá realizarlo.
+- Se asume que los turnos tendrán únicamente dos estados: "En espera" o "Ya atendido" por lo que no se borraran los turnos, solo se mostrara la eliminación para realizar el CRUD.
 
 ---
 ## 🛠️ **Diseño del Sistema**
@@ -54,40 +56,56 @@ El sistema está orientado a gestionar turnos diarios (9:00 a.m. a 5:00 p.m.), c
 
 1. **Recepcionista (asignador)**: Asigna turnos a los ciudadanos.
 2. **Gestor de trámites (administrativo)**: Atiende a los ciudadanos en el orden asignado.
-3. **Supervisor (admin)**: Gestiona roles y supervisa el sistema.
+3. **Super usuario (admin)**: Super usuario que realiza las actividades.
 
 ---
 ## 📋 **Entidades del Sistema**
 - **Ciudadano**: Persona que solicita un turno.
 - **Trámite**: Tipo de trámite solicitado.
 - **Turno**: Registro asignado al ciudadano y al trámite, con estado ("En espera", "Ya atendido").
-- **Usuario**: Empleado con roles predefinidos (recepcionista, administrativo, supervisor).
+- **Usuario**:Super usuario que asigna el turno y gestiona el tramite
 
 ---
 ## 🛠️ **Relaciones entre Entidades**
--	Un ciudadano puede tener múltiples turnos: Relación uno a muchos entre ciudadano y turno.
--	Un usuario (asignador o administrativo) pueden asignar muchos turnos y gestionar muchos tramites. Relación de uno a muchos entre usuario y turno, al igual que un usuario y tramite.
--	Un turno está asociado a un trámite específico. Esta es una relación de uno a uno.
+**Trámite y Turno:** 
+- Un trámite puede estar asociado a varios turnos (relación de 1 a n).
+- Un turno solo está relacionado con un trámite específico (relación de n a 1).
+
+**Turno y Ciudadano:**
+- Un turno puede ser solicitado por un solo ciudadano (relación de n a 1).
+- Un ciudadano puede tener varios turnos (relación de 1 a n).
+
+**Turno y Usuario:**
+- Un turno es atendido o gestionado por un solo usuario (relación de n a 1).
+- Un usuario puede gestionar varios turnos (relación de 1 a n).
+  
+**Diagrama UML**
+![Diagrama UML](https://github.com/Jazmin-25/IslasJazmin_pruebatec2/blob/main/DiagramaDefinitivo.drawio.png)
 
 ---
 ## 🔄 **Flujo del Sistema**
 1. **Inicio de Sesión**:
-- Cada usuario ingresa con correo y contraseña.
-- Los usuarios son:
-- Recepcionista (asignador): Encargado de registrar turnos.
-- Gestor de trámites (administrativo): Responsable de atender a los ciudadanos.
-- Supervisor (admin): Encargado de la gestión y supervisión general del sistema.
+- El super usuario ingresa con correo y contraseña.
 
 2. **Registro de Turnos**:
-Cuando un ciudadano llega a la Secretaria de Movilidad para realizar un trámite, el recepcionista lo registra:
+Cuando un ciudadano llega a la Secretaría de Movilidad para realizar un trámite:
 - Datos requeridos: Nombre, apellido y teléfono.
-- Generación automática de un número de turno.
-4. **Gestión de Turnos**:
-En la pantalla del sistema, el gestor de trámites podrá visualizar la fila de turnos asignados por el recepcionista.
-- Estados: "En espera" y "Ya atendido".
-- Gestión en tiempo real por el administrativo.
-5. **Gestión de Usuarios**:
-- Creación, lectura, modificación y eliminación de usuarios con roles específicos por el supervisor.
+- Se registra un nuevo trámite.
+- Se genera un nuevo turno asociado al trámite y al ciudadano.
+3. **Gestión de Turnos**:
+Visualizar la lista de turnos pendientes.
+- Cambiar el estado de un turno de "En espera" a "Ya atendido".
+- Buscar turnos por diferentes criterios (fecha, trámite, ciudadano).
+4. **Gestión de Trámites**:
+  El usuario puede:
+- Crear nuevos tipos de trámites.
+- Modificar información de trámites existentes.
+- Eliminar trámites (teniendo en cuenta que solo es para demostrar el CRUD).
+5. **Gestión de Ciudadanos**:
+El usuario puede:
+- Registrar nuevos ciudadanos.
+- Consultar información de ciudadanos.
+- Modificar información de ciudadanos.
 
 ---
 ## 💻 **Tecnologías Utilizadas**
@@ -123,5 +141,4 @@ En la pantalla del sistema, el gestor de trámites podrá visualizar la fila de 
    - Esquema SQL.
    - Datos de prueba.
 4. **Diagrama UML**: Representación de entidades y relaciones.
-![Diagrama UML](https://github.com/Jazmin-25/IslasJazmin_pruebatec2/blob/main/DiagramaClasesTurnero.drawio.png?raw=true)
 ---

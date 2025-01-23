@@ -1,5 +1,8 @@
 
 
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.softek.pruebatecnica2.logica.Ciudadano"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -43,7 +46,7 @@
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
 
-            <!-- Resultado de la busqueda -->
+             <!<!-- Resultado de la busqueda -->
             <div class="results-table mt-4">
                 <h2>Resultados de Busqueda</h2>
                 <table class="table">
@@ -52,24 +55,30 @@
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Teléfono</th>
-                            <th>Acciones</th>
                         </tr>
-                    </thead>
+                    </thead>        
                     <tbody>
                         <%
-                            //List<Ciudadano> listaCiudadanos = (List) request.getSession().getAttribute("listaCiudadanos");
-                            //if (listaCiudadanos != null) {
-                            //  for (Ciudadano ciudad : listaCiudadanos) {
-                        %>
+                            //traer la lista de personas
+                            List<Ciudadano> listaCiudadanos = (ArrayList<Ciudadano>) request.getAttribute("listaCiudadanos");
+                            if (listaCiudadanos != null) {
+                                for (Ciudadano ciudad : listaCiudadanos) {//agregar programacion funcional al for%>
                         <tr>
-
+                            <td><%=ciudad.getNombre()%> </td>
+                            <td><%=ciudad.getApellido()%> </td>
+                            <td><%=ciudad.getTelefono()%> </td>
                         </tr>
-                        <%
-                            }
-                        }
-                        %>
-                       
-                    </body>
+                        </tr>      
+                        <% 
+                         }
+                     %>
+                  </tbody>  
+                  <% }%>
+             </table> 
+         </div>
+             
+             
+        </div>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </body>

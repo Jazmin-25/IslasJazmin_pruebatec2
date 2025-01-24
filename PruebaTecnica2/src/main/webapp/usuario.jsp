@@ -1,8 +1,3 @@
-<%-- 
-    Document   : usuario
-    Created on : 23 ene 2025, 2:42:42
-    Author     : zoro_
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -29,9 +29,7 @@ public class TurnoSv extends HttpServlet {
             throws ServletException, IOException {
          List<Turno> listaTurnos = new ArrayList<Turno>();
         
-        listaTurnos = control.getTurnos();
-        
-         
+        listaTurnos = control.listaTurnos();         
         response.sendRedirect("altaTurno.jsp");
     }
 
@@ -49,7 +47,7 @@ public class TurnoSv extends HttpServlet {
         Long tramiteId = Long.parseLong(request.getParameter("tramite_id"));
         Long usuarioId = Long.parseLong(request.getParameter("usuario_id"));
 
-        control.crearTurno(numeroTurno, tramiteDescripcion, fechaHora, estado, ciudadanoId, tramiteId, usuarioId);
+        control.crearTurnos(numeroTurno, tramiteDescripcion, fechaHora, estado, ciudadanoId, tramiteId, usuarioId);
 
         response.sendRedirect("index.jsp");
 

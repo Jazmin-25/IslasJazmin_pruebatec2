@@ -2,6 +2,9 @@
 package com.softek.pruebatecnica2.persistencia;
 
 import com.softek.pruebatecnica2.logica.Ciudadano;
+import com.softek.pruebatecnica2.logica.Tramite;
+import com.softek.pruebatecnica2.logica.Turno;
+import com.softek.pruebatecnica2.logica.Usuario;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +40,22 @@ public class ControladoraPersistencia {
        // } catch (Exception ex) {
          //   Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    public Ciudadano traerCiudadanoId(Long ciudadanoId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Tramite traerTramiteId(Long tramiteId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Usuario traerUsuarioId(Long usuarioId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void crearTurno(Turno turno) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
         
     
 }

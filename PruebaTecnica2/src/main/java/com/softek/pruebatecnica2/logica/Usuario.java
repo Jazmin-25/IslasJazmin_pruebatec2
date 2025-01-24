@@ -2,10 +2,13 @@
 package com.softek.pruebatecnica2.logica;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable {
@@ -14,7 +17,10 @@ public class Usuario implements Serializable {
     private Long id;
     private String email;
     private String password;
-    
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Turno> turnos;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Tramite> tramites;
     
     //constructor vacio
 

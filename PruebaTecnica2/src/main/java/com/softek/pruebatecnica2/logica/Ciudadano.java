@@ -2,10 +2,13 @@
 package com.softek.pruebatecnica2.logica;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Ciudadano implements Serializable {
@@ -15,6 +18,10 @@ public class Ciudadano implements Serializable {
     private String nombre;
     private String apellido;
     private String telefono;
+    //un ciudadano puede tener varios turbos y el turno puede ver al ciudadano 
+    @OneToMany(mappedBy = "ciudadano", cascade = CascadeType.ALL) 
+    private List<Turno> listaturnos;
+    
     
     //consturctor vacio
 

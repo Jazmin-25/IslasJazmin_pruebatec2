@@ -19,7 +19,7 @@ public class Ciudadano implements Serializable {
     private String apellido;
     private String  telefono;
     //un ciudadano puede tener varios turbos y el turno puede ver al ciudadano 
-    @OneToMany(mappedBy = "ciudadano", cascade = CascadeType.ALL, orphanRemoval = true) 
+    @OneToMany(mappedBy = "ciudadano", cascade = CascadeType.ALL) 
     private List<Turno> listaturnos;
 
     

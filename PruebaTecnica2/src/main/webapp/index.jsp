@@ -1,5 +1,3 @@
-
-
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.softek.pruebatecnica2.logica.Ciudadano"%>

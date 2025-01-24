@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Turno implements Serializable {
@@ -16,12 +19,27 @@ public class Turno implements Serializable {
     private String fechaHora;
     private String tramiteDescripcion;
     private String estado;
+     // relación con Ciudadano (Muchos a un)
+    @ManyToOne
+    @JoinColumn(name = "ciudadano_id")
+    private Ciudadano ciudadano;
+    
+    //el turno puede ver el tramite
+    // Relación con Tramite (Uno a uno)
+    @OneToOne
+    @JoinColumn(name = "tramite_id")
+    private Tramite tramite;
+
+    // relación con Usuario (Muchos a uno)
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+    
     
     //constructor vacio
     public Turno() {
     }
-    
-    
+        
     //constructor atributos 
      public Turno(Long id, String numeroTurno, String fechaHora, String tramiteDescripcion, String estado) {
         this.id = id;

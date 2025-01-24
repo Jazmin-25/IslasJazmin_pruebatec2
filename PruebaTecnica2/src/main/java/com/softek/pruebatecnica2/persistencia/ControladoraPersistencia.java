@@ -76,4 +76,6 @@ public class ControladoraPersistencia {
     public List<Turno> obtenerTodosLosTurnos() {
         return turnJpa.findTurnoEntities();
     }
+    
+     
 }

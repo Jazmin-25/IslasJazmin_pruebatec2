@@ -7,12 +7,11 @@ import java.util.stream.Collectors;
 
 public class ControladoraLogica { //es el main
 
-//genero el vinculo entre controlpersistencia y logica
+  // Genero el vínculo entre controlpersistencia y lógica
     ControladoraPersistencia controlPersi = new ControladoraPersistencia();
-    
 
     public void crearCiudadano(String nombre, String apellido, String telefono) {
-         // Inicio una lista vacía para los turnos, para evitar el erro
+        // Inicio una lista vacía para los turnos, para evitar errores
         List<Turno> listaTurnos = new ArrayList<>(); // Creamos el ciudadano con la lista vacía
         Ciudadano ciudad = new Ciudadano();
         ciudad.setNombre(nombre);
@@ -21,86 +20,35 @@ public class ControladoraLogica { //es el main
 
         controlPersi.crearCiudadano(ciudad);
     }
-    //mostrarCiudadano
-    public List<Ciudadano> buscarPorApellido(String busquedaApellido) {
-        List<Ciudadano> ciudadanosCoincidentes = new ArrayList<>(); 
-        ciudadanosCoincidentes = controlPersi.buscarPorApellido(busquedaApellido);
 
+    // Mostrar ciudadano
+    public List<Ciudadano> buscarPorApellido(String busquedaApellido) {
+        List<Ciudadano> ciudadanosCoincidentes = new ArrayList<>();
+        ciudadanosCoincidentes = controlPersi.buscarPorApellido(busquedaApellido);
         return ciudadanosCoincidentes;
     }
-    
-    //eliminarCiudadano
+
+    // Eliminar ciudadano
     public void eliminarCiudadano(Long id) {
         controlPersi.eliminarCiudadano(id);
     }
 
+    // Buscar ciudadano
     public Ciudadano buscarCiudadano(Long id) {
         return controlPersi.traerCiudadano(id);
     }
-    //editarCiudadano
 
+    // Editar ciudadano
     public void editarCiudadano(Ciudadano ciudad) {
         controlPersi.editarCiudadano(ciudad);
     }
-    
-    
-    
-    /////---------------------USUARIO-----------------------
-    public Usuario buscarUsuario(String email) {
-      //return usuJpa.findUserByEmail(email);
-    }
- /////---------------------TURNOS-----------------------
-    public List<Turno> listaTurnos() {
-          return controlPersi.obtenerTodosLosTurnos();
-    }
+       
+    /////---------------------TURNOS-----------------------
+    // Aquí puedes agregar los métodos relacionados con los turnos
 
     public void crearTurnos(String numeroTurno, String tramiteDescripcion, String fechaHora, String estado, Long ciudadanoId, Long tramiteId, Long usuarioId) {
-        Turno turno = new Turno();
-        Ciudadano ciudad = controlPersi.traerCiudadanoId(ciudadanoId);
-        Ciudadano ciudadano = controlPersi.traerCiudadanoId(ciudadanoId);
-        Tramite tramite = controlPersi.traerTramiteId(tramiteId);
-        Tramite tramite = controlPersi.traerTramiteId(tramiteId);
-        Usuario usuario = controlPersi.traerUsuarioId(usuarioId);
-        Usuario usuario = controlPersi.traerUsuarioId(usuarioId);
-        Turno turno = new Turno();
-        turno.setNumeroTurno(numeroTurno);
-        turno.setNumeroTurno(numeroTurno);
-        turno.setTramiteDescripcion(tramiteDescripcion);
-        turno.setTramiteDescripcion(tramiteDescripcion);
-        turno.setFechaHora(fechaHora);
-        turno.setFechaHora(fechaHora);
-        turno.setEstado(estado);
-        turno.setEstado(estado);
-        turno.setCiudadano(ciudadanoId);
-        turno.setCiudadano(ciudadano);
-        turno.setTramite(tramiteId);
-        turno.setTramite(tramite);
-        turno.setUsuario(usuarioId);
-        turno.setUsuario(usuario);
-        
-        controlPersi.crearTurno(turno);
-        controlPersi.crearTurno(turno);
-        
-
         
     }
+    
 
-    public List<Turno> busquedaAtendido(String buscarEstado) {
-       //Filtrado desde la logica con lambdas y streams
-       return controlPersi.busquedaAtendido().stream() 
-        .filter(turn -> turn.getEstado().equals()) 
-        .collect(Collectors.toList());
-
-       
-        List<Turno> turnosCoincidentes = new ArrayList<>();
-        turnosCoincidentes = controlPersi.busquedaAtendido(busquedaAtendido);
-        
-        return turnosCoincidentes;
-
-    }
-
-    public List<Turno> obtenerTodosLosTurnos() {
-     return controlPersi.obtenerTodosLosTurnos();
-             
-    }
-}
+} 

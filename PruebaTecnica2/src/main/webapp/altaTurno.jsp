@@ -1,9 +1,3 @@
-<%-- 
-    Document   : altaTurno
-    Created on : 23 ene 2025, 1:05:04
-    Author     : zoro_
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +11,7 @@
         <h1>Gestión de turnos</h1>
         
         <p>Horario de atención de 9:00 a.m. a 5:00 p.m. de Lunes a Viernes</p>
-        <form class="user" action="TurnoSv" method="POST">
+        <form class="user" action="TurnoSv" method="POST"> 
             <!-- alta de turno -->
             <div class="col-sm-6 mb-3">
                 <label for="nombre">Asigne el numero de turno:</label>
@@ -69,7 +63,6 @@
 
             <!-- Botón de Enviar -->
             <button class="btn btn-primary btn-user btn-block" type="submit"> 
-                Crear Turno
             </button>
             
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

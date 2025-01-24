@@ -1,12 +1,9 @@
-
 package com.softek.pruebatecnica2.servlets;
-
 import com.softek.pruebatecnica2.logica.ControladoraLogica;
 import com.softek.pruebatecnica2.logica.Turno;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "TurnoSv", urlPatterns = {"/TurnoSv"})
 public class TurnoSv extends HttpServlet {
-
+     //el servelt se conecta con la logica mediante la controladora
     ControladoraLogica control = new ControladoraLogica();
  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -27,13 +24,9 @@ public class TurnoSv extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         List<Turno> listaTurnos = new ArrayList<Turno>();
-        
-        listaTurnos = control.listaTurnos();         
-        response.sendRedirect("altaTurno.jsp");
     }
 
-    
+    //unicamente doy de alta para evitar errores
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
